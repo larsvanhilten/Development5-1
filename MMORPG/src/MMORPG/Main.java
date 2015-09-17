@@ -11,5 +11,4 @@ package MMORPG;
  */
 public class Main {
     
-   
 }
