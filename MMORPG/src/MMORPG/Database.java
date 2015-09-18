@@ -16,20 +16,22 @@ import javax.persistence.Query;
  * @author Lars
  */
 public class Database {
-        EntityManagerFactory emf; //= Persistence.createEntityManagerFactory("MMORPGPU");
-        EntityManager em;// = emf.createEntityManager();
+        private EntityManagerFactory emf;
+        private EntityManager em;
     public Database(){
-    
-        //TODO fix select query: make entity managers work
+        emf = Persistence.createEntityManagerFactory("MMORPGPU");
+        em  = emf.createEntityManager();
     }
     
     public List<String> selectQuery(String selectQuery){
 
         Query query = em.createQuery(selectQuery);
         List<String> result = query.getResultList();
-        
         return result;
+        
+        //TODO: not working?
     }
+
 
    
     

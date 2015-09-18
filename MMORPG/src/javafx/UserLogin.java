@@ -19,9 +19,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+
 
 /**
  *
@@ -49,13 +47,16 @@ public class UserLogin extends Application {
         //TODO set image
         
         Parent root = FXMLLoader.load(getClass().getResource("UserLogin.fxml"));
+        
         primaryStage.setTitle("MMORPG Login");
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-        
+  
+        //TODO: enable button when database connection is establisid; error?
+        //loginButton.setDisable(true);
         database = new Database();
-        
+        //loginButton.setDisable(false);
     }
 
     /**
@@ -69,12 +70,16 @@ public class UserLogin extends Application {
         String username = usernameInput.getText();
         String password = passwordInput.getText();
            
-        List<String> result = database.selectQuery("SELECT name FROM character");
+        List<String> result = database.selectQuery("SELECT s.name FROM Server s");
+        
+
         
         for(int x = 0; x < result.size(); x++){
             System.out.println(result.get(x));
         
         }
+        
+        //just some random testing
         if(username.equals("lars") && password.equals("dataflow")){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCharacters.fxml"));
             Stage stage = new Stage();
@@ -87,7 +92,7 @@ public class UserLogin extends Application {
         
         
         }else{
-            errorLabel.setText("Wrong username or password");
+            errorLabel.setText("Wrong username or password!");
 
         }
             //TODO: open new window
