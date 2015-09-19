@@ -8,13 +8,19 @@ package databaseEntity;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -26,7 +32,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Lars
  */
 @Entity
-@Table(name = "user")
+@Table(name = "\"user\"")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "User.findAll", query = "SELECT u FROM User u"),
@@ -68,8 +74,12 @@ public class User implements Serializable {
     private Boolean banned;
     @OneToMany(mappedBy = "owner")
     private Collection<Character> characterCollection;
+    
+    private static EntityManager em;
 
     public User() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MMORPGPU");
+        em = emf.createEntityManager();
     }
 
     public User(String username) {
@@ -189,5 +199,42 @@ public class User implements Serializable {
     public String toString() {
         return "databaseEntity.User[ username=" + username + " ]";
     }
+    
+      public List<User> selectQuery(String selectQuery){
+        Query query = em.createQuery(selectQuery);
+        List<User> result = query.getResultList();
+        return result;
+        
+        //TODO: not working?
+    }
+      
+    public User findUser(String username) {
+        User user = new User();
+        try{
+        Query query = em.createNamedQuery("User.findByUsername");
+        query.setParameter("username", username);
+        user = (User) query.getSingleResult();
+        }catch(Exception e){   
+
+        }
+        return user;
+    }
+
+    public void persist(Object object) {
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        try {
+        em.persist(object); 
+        transaction.commit();
+        em.getTransaction().begin();
+        } catch (Exception e) {
+            e.printStackTrace();
+            em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+      
+      
     
 }

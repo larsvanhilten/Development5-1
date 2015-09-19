@@ -42,7 +42,6 @@ public class UserLogin extends Application {
     @FXML
     private Label registerLink;
     
-    private Database database;
     
     
     @Override
@@ -59,7 +58,6 @@ public class UserLogin extends Application {
   
         //TODO: enable button when database connection is establisid; error?
         //loginButton.setDisable(true);
-        database = new Database();
         //loginButton.setDisable(false);
     }
 
@@ -74,32 +72,25 @@ public class UserLogin extends Application {
         String username = usernameInput.getText();
         String password = passwordInput.getText();
            
-       /* ReadAllQuery query = new ReadAllQuery(User.class);
+        if(username.equals("") || password.equals("")){
+            errorLabel.setText("Please enter your password or username!");
+            return;
         
-        ExpressionBuilder builder = query.getExpressionBuilder();
+        }      
         
-        query.setSelectionCriteria(builder.get("username"));
+        User user = new User();        
+        user = user.findUser(username);
         
-        
-        
-        Session clientSession = (Session) .acquireClientSession();
-        
-        List test = (List) clientSession.executeQuery(query);*/
-        
-        
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);
-        
-        
-        List<User> result = user.selectQuery("SELECT s FROM User s");
+        String resultUsername = user.getUsername();
+        String resultPassword = user.getPassword();
 
-        for(int x = 0; x < result.size(); x++){
-            System.out.println(result.get(x));       
+        
+        if(resultUsername == null || resultPassword == null){
+            errorLabel.setText("Wrong username or password!");
+            return;
         }
         
-        //just some random testing
-        if(username.equals("lars") && password.equals("dataflow")){
+        if(resultUsername.equals(username) && resultPassword.equals(password)){
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCharacters.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene((Pane) loader.load()));
@@ -110,11 +101,8 @@ public class UserLogin extends Application {
             registerLink.getScene().getWindow().hide();
         
         
-        }else{
-            errorLabel.setText("Wrong username or password!");
-
         }
-            //TODO: open new window
+           
         
     }
     

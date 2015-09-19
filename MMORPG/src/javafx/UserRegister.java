@@ -5,6 +5,7 @@
  */
 package javafx;
 
+import databaseEntity.User;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXML;
@@ -39,19 +40,32 @@ public class UserRegister extends Application {
     public void start(Stage primaryStage) {}
     
     public void onRegisterButton(){
+        String username = usernameInput.getText();
+        String password = passwordInput.getText();
+        String passwordVerification = passwordVerificationInput.getText();
         
-        if(usernameInput.getText().equals("") || passwordInput.getText().equals("")){
+        if(username.equals("") || password.equals("")){
             errorLabel.setText("There are empty fields!");
             return;
         }
     
-        if(!passwordInput.getText().equals(passwordVerificationInput.getText())){
+        if(!password.equals(passwordVerification)){
             errorLabel.setText("The passwords don't match!");
             return;
         
         }
         
-        //TODO: register in database
+        //TODO: check if username doesnt exist already
+        
+        User user = new User();
+
+        user.setUsername(username);
+        user.setPassword(password);
+        
+        user.persist(user);
+        
+        
+
     
     
     }
