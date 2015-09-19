@@ -6,6 +6,7 @@
 package javafx;
 
 import MMORPG.Database;
+import databaseEntity.User;
 import java.io.IOException;
 import java.util.List;
 import javafx.application.Application;
@@ -19,6 +20,9 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.eclipse.persistence.expressions.ExpressionBuilder;
+import org.eclipse.persistence.queries.ReadAllQuery;
+import org.eclipse.persistence.sessions.Session;
 
 
 /**
@@ -70,13 +74,28 @@ public class UserLogin extends Application {
         String username = usernameInput.getText();
         String password = passwordInput.getText();
            
-        List<String> result = database.selectQuery("SELECT s.name FROM Server s");
+       /* ReadAllQuery query = new ReadAllQuery(User.class);
         
+        ExpressionBuilder builder = query.getExpressionBuilder();
+        
+        query.setSelectionCriteria(builder.get("username"));
+        
+        
+        
+        Session clientSession = (Session) .acquireClientSession();
+        
+        List test = (List) clientSession.executeQuery(query);*/
+        
+        
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);
+        
+        
+        List<User> result = user.selectQuery("SELECT s FROM User s");
 
-        
         for(int x = 0; x < result.size(); x++){
-            System.out.println(result.get(x));
-        
+            System.out.println(result.get(x));       
         }
         
         //just some random testing
