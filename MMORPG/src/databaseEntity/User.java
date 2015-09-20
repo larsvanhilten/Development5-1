@@ -26,6 +26,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
+import org.eclipse.persistence.queries.InsertObjectQuery;
 
 /**
  *
@@ -219,22 +220,24 @@ public class User implements Serializable {
         }
         return user;
     }
-
-    public void persist(Object object) {
+    
+    public User registerUser(String username, String password){
+        User user = new User();
+        user.setUsername(username);
+        user.setPassword(password);       
+        
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        try {
-        em.persist(object); 
+        
+        try{
+        em.persist(user);
         transaction.commit();
         em.getTransaction().begin();
-        } catch (Exception e) {
+        } catch (Exception e){
             e.printStackTrace();
-            em.getTransaction().rollback();
         } finally {
-            em.close();
+        em.close();
         }
-    }
-      
-      
-    
+        return user;
+    } 
 }
