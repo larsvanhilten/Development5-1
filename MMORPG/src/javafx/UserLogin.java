@@ -42,6 +42,7 @@ public class UserLogin extends Application {
     @FXML
     private Label registerLink;
     
+    private static Database database;
     
     
     @Override
@@ -55,6 +56,8 @@ public class UserLogin extends Application {
         primaryStage.setResizable(false);
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
+        
+        database = new Database();
   
         //TODO: enable button when database connection is establisid; error?
         //loginButton.setDisable(true);
@@ -77,9 +80,8 @@ public class UserLogin extends Application {
             return;
         
         }      
-        
-        User user = new User();        
-        user = user.findUser(username);
+            
+        User user = database.findUser(username);
         
         String resultUsername = user.getUsername();
         String resultPassword = user.getPassword();
@@ -113,7 +115,10 @@ public class UserLogin extends Application {
         stage.setResizable(false);
         stage.centerOnScreen();
         stage.setTitle("MMORPG Register");
+        UserRegister userRegister = loader.<UserRegister>getController();
+        userRegister.setDatabase(database);
         stage.show();
+        
         registerLink.getScene().getWindow().hide();
         
     

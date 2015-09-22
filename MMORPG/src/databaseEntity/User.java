@@ -8,25 +8,19 @@ package databaseEntity;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
-import org.eclipse.persistence.queries.InsertObjectQuery;
 
 /**
  *
@@ -79,8 +73,6 @@ public class User implements Serializable {
     private static EntityManager em;
 
     public User() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("MMORPGPU");
-        em = emf.createEntityManager();
     }
 
     public User(String username) {
@@ -195,49 +187,4 @@ public class User implements Serializable {
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "databaseEntity.User[ username=" + username + " ]";
-    }
-    
-      public List<User> selectQuery(String selectQuery){
-        Query query = em.createQuery(selectQuery);
-        List<User> result = query.getResultList();
-        return result;
-        
-        //TODO: not working?
-    }
-      
-    public User findUser(String username) {
-        User user = new User();
-        try{
-        Query query = em.createNamedQuery("User.findByUsername");
-        query.setParameter("username", username);
-        user = (User) query.getSingleResult();
-        }catch(Exception e){   
-
-        }
-        return user;
-    }
-    
-    public User registerUser(String username, String password){
-        User user = new User();
-        user.setUsername(username);
-        user.setPassword(password);       
-        
-        EntityTransaction transaction = em.getTransaction();
-        transaction.begin();
-        
-        try{
-        em.persist(user);
-        transaction.commit();
-        em.getTransaction().begin();
-        } catch (Exception e){
-            e.printStackTrace();
-        } finally {
-        em.close();
-        }
-        return user;
-    } 
 }

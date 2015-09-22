@@ -5,6 +5,7 @@
  */
 package javafx;
 
+import MMORPG.Database;
 import databaseEntity.User;
 import java.io.IOException;
 import javafx.application.Application;
@@ -36,9 +37,15 @@ public class UserRegister extends Application {
     @FXML
     private Button backButton;
     
+    private Database database;
+    
     @Override
     public void start(Stage primaryStage) {}
     
+    public void setDatabase(Database database){
+        this.database = database;
+    
+    }
     public void onRegisterButton(){
         String username = usernameInput.getText();
         String password = passwordInput.getText();
@@ -57,12 +64,8 @@ public class UserRegister extends Application {
         
         //TODO: check if username doesnt exist already
         
-        User user = new User();
-
-        user.setUsername(username);
-        user.setPassword(password);
         
-        user.persist(user);
+        database.registerUser(username, password);
         
         
 

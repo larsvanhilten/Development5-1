@@ -22,6 +22,7 @@ import javax.persistence.Query;
 public class Database {
      @PersistenceContext(unitName = "MMORPGPU", type = PersistenceContextType.EXTENDED)
      private static EntityManager em;
+     
     public Database(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MMORPGPU");
         em = emf.createEntityManager();
