@@ -99,6 +99,10 @@ public class UserLogin extends Application {
             stage.setResizable(false);
             stage.centerOnScreen();
             stage.setTitle("MMORPG Characters");
+            UserCharacters userCharacters = loader.<UserCharacters>getController();
+            userCharacters.setLoggedInUser(user);
+            userCharacters.setDatabase(database);
+            //give userCharacters database & loggedInUser
             stage.show();
             registerLink.getScene().getWindow().hide();
         

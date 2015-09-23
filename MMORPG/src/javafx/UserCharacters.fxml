@@ -1,11 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.shape.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.UserCharacters">
-    
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="javafx.UserCharacters">
+   <children>
+      <ChoiceBox layoutX="24.0" layoutY="42.0" prefHeight="25.0" prefWidth="150.0" />
+      <Line endY="400.0" layoutX="200.0" layoutY="34.0" startY="-35.0" />
+      <Button layoutX="24.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="New character" />
+      <Label layoutX="24.0" layoutY="318.0" text="Available character slots:" />
+      <Button layoutX="436.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Connect to server" />
+      <ChoiceBox disable="true" layoutX="24.0" layoutY="181.0" prefWidth="150.0" />
+      <ChoiceBox disable="true" layoutX="24.0" layoutY="229.0" prefWidth="150.0" />
+      <Label layoutX="24.0" layoutY="24.0" text="Characters" />
+      <Label layoutX="24.0" layoutY="164.0" text="Race" />
+      <Label layoutX="24.0" layoutY="212.0" text="Class" />
+      <Label layoutX="218.0" layoutY="34.0" text="Character name: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="220.0" layoutY="81.0" text="Race: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="218.0" layoutY="127.0" text="Class: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Label layoutX="24.0" layoutY="259.0" text="Server" />
+      <ChoiceBox disable="true" layoutX="24.0" layoutY="276.0" prefWidth="150.0" />
+      <Label layoutX="218.0" layoutY="168.0" text="Server:">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <Button layoutX="218.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Delete character" />
+      <Button fx:id="managementButton" layoutX="24.0" layoutY="396.0" mnemonicParsing="false" onAction="#openManagementWindow" prefHeight="25.0" prefWidth="150.0" text="Account management" />
+   </children>
 </AnchorPane>
