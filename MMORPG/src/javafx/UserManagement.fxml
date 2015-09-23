@@ -5,7 +5,20 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.UserManagement">
-    
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.UserManagement">
+  <children>
+    <Label id="subcriptionLabel" fx:id="subscriptionStatusLabel" layoutX="315.0" layoutY="75.0" text="subscriptionstatus" />
+    <Label fx:id="nameLabel" layoutX="48.0" layoutY="104.0" text="name" />
+    <Button fx:id="addSubsLabel" layoutX="308.0" layoutY="105.0" mnemonicParsing="false" text="Add Subscription" />
+    <Label fx:id="characterslotLabel" layoutX="175.0" layoutY="75.0" text="characterSlots" />
+    <Button fx:id="addSlotsButton" disable="false" layoutX="175.0" layoutY="105.0" mnemonicParsing="false" text="Add Slots" />
+    <Label fx:id="fundsLabel" layoutX="499.0" layoutY="75.0" text="funds" />
+    <Button fx:id="addFundsLabel" layoutX="476.0" layoutY="105.0" mnemonicParsing="false" text="Add Funds" />
+    <Label id="nameLabel" fx:id="usernameLabel" layoutX="48.0" layoutY="75.0" text="username" />
+    <Line endX="-100.0" endY="396.0" layoutX="236.0" layoutY="4.0" startX="-100.0" />
+    <Line endX="-100.0" endY="396.0" layoutX="376.0" layoutY="4.0" startX="-100.0" />
+    <Line endX="-100.0" endY="397.0" layoutX="544.0" layoutY="4.0" startX="-100.0" startY="-3.0" />
+  </children>
 </AnchorPane>
