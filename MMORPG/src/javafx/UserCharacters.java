@@ -62,7 +62,6 @@ public class UserCharacters extends Application {
     }
     private User loggedInUser;
     
-    
     @Override
     public void start(Stage primaryStage) {
         
@@ -78,7 +77,9 @@ public class UserCharacters extends Application {
             stage.centerOnScreen();
             stage.setTitle("MMORPG Management");
             UserManagement userManagement = loader.<UserManagement>getController();
-            //give userCharacters database & loggedInUser
+            userManagement.setLoggedInUser(loggedInUser);
+            userManagement.setDatabase(database);
+        
             stage.show();
             managementButton.getScene().getWindow().hide();
     
