@@ -6,14 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.UserLogin">
-   <children>
-      <TextField fx:id="usernameInput" layoutX="101.0" layoutY="35.0" />
-      <PasswordField fx:id="passwordInput" layoutX="101.0" layoutY="86.0" />
-      <Label layoutX="101.0" layoutY="18.0" text="Username" />
-      <Label layoutX="101.0" layoutY="69.0" text="Password" />
-      <Button fx:id="loginButton" defaultButton="true" layoutX="101.0" layoutY="120.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="25.0" prefWidth="149.0" text="Log in" />
-      <Label fx:id="registerLink" layoutX="132.0" layoutY="179.0" onMouseReleased="#onRegisterLink" text="No account yet?" textFill="#0d2bb5" underline="true" />
-      <Label fx:id="errorLabel" alignment="CENTER" layoutX="5.0" layoutY="155.0" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-   </children>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.UserLogin">
+  <children>
+    <TextField fx:id="usernameInput" layoutX="101.0" layoutY="35.0" text="lars" />
+    <PasswordField fx:id="passwordInput" layoutX="101.0" layoutY="86.0" text="lars" />
+    <Label layoutX="101.0" layoutY="18.0" text="Username" />
+    <Label layoutX="101.0" layoutY="69.0" text="Password" />
+    <Button fx:id="loginButton" defaultButton="true" layoutX="101.0" layoutY="120.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="25.0" prefWidth="149.0" text="Log in" />
+    <Label fx:id="registerLink" layoutX="132.0" layoutY="179.0" onMouseReleased="#onRegisterLink" text="No account yet?" textFill="#0d2bb5" underline="true" />
+    <Label fx:id="errorLabel" alignment="CENTER" layoutY="155.0" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+  </children>
 </AnchorPane>

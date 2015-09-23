@@ -64,12 +64,10 @@ public class UserCharacters extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-        
-        
-        
+  
     }
     
-    public void openManagementWindow() throws IOException {
+    public void openManagementWindow() throws IOException, Exception {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserManagement.fxml"));
             Stage stage = new Stage();
             stage.setScene(new Scene((Pane) loader.load()));
@@ -79,6 +77,7 @@ public class UserCharacters extends Application {
             UserManagement userManagement = loader.<UserManagement>getController();
             userManagement.setLoggedInUser(loggedInUser);
             userManagement.setDatabase(database);
+            userManagement.start(stage);
         
             stage.show();
             managementButton.getScene().getWindow().hide();
