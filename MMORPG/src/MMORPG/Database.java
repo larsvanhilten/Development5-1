@@ -6,7 +6,6 @@
 package MMORPG;
 
 import databaseEntity.User;
-import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -40,10 +39,16 @@ public class Database {
         return user;
     }
     
-    public User registerUser(String username, String password){
+    public User registerUser(String username, String password, String firstName, String lastName){
         User user = new User();
         user.setUsername(username);
-        user.setPassword(password);       
+        user.setPassword(password);  
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setBalance(0.0);
+        user.setBanned(false);
+        user.setCharacterSlots(5);
+        user.setMonthsPayed(0);
         
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
