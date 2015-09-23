@@ -102,7 +102,7 @@ public class UserLogin extends Application {
             UserCharacters userCharacters = loader.<UserCharacters>getController();
             userCharacters.setLoggedInUser(user);
             userCharacters.setDatabase(database);
-            //give userCharacters database & loggedInUser
+            userCharacters.start(stage);
             stage.show();
             registerLink.getScene().getWindow().hide();
         

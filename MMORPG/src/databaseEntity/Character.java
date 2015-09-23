@@ -25,10 +25,10 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Lars
  */
 @Entity
-@Table(name = "character")
+@Table(name = "\"character\"")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Character.findAll", query = "SELECT c FROM Character c"),
+    @NamedQuery(name = "Character.findAll", query = "SELECT c FROM User u JOIN u.characterCollection c WHERE u.username = :username"),
     @NamedQuery(name = "Character.findByName", query = "SELECT c FROM Character c WHERE c.name = :name"),
     @NamedQuery(name = "Character.findByClass1", query = "SELECT c FROM Character c WHERE c.class1 = :class1"),
     @NamedQuery(name = "Character.findByRace", query = "SELECT c FROM Character c WHERE c.race = :race"),

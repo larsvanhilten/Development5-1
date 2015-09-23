@@ -6,6 +6,9 @@
 package MMORPG;
 
 import databaseEntity.User;
+import databaseEntity.Character;
+import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -65,5 +68,16 @@ public class Database {
         return user;
     }     
     
+    public List<Character> getCharacters(String username){
+        List<Character> characters = new ArrayList<>();
+        try{
+        Query query = em.createNamedQuery("Character.findAll");
+        query.setParameter("username", username);
+        characters = query.getResultList();
+        }catch(Exception e){   
+        }
+    
+        return characters;
+    }
     
 }

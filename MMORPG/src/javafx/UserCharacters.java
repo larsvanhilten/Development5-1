@@ -7,8 +7,16 @@ package javafx;
 
 import MMORPG.Database;
 import databaseEntity.User;
+import databaseEntity.Character;
 import java.io.IOException;
+import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,7 +33,7 @@ import javafx.stage.Stage;
 public class UserCharacters extends Application {
     
     @FXML
-    private ChoiceBox charactersBox;
+    private ChoiceBox<String> charactersBox;
     @FXML
     private ChoiceBox raceBox;
     @FXML
@@ -49,9 +57,10 @@ public class UserCharacters extends Application {
     @FXML
     private Button deleteCharacterButton;
     @FXML
-    private Button ConnectServerButton;
     
+    private Button ConnectServerButton;
     private Database database;
+    private List<databaseEntity.Character> characters;
 
     public void setDatabase(Database database) {
         this.database = database;
@@ -64,8 +73,11 @@ public class UserCharacters extends Application {
     
     @Override
     public void start(Stage primaryStage) {
-  
+       setLabels();
+        
     }
+    
+  
     
     public void openManagementWindow() throws IOException, Exception {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserManagement.fxml"));
@@ -82,6 +94,46 @@ public class UserCharacters extends Application {
             stage.show();
             managementButton.getScene().getWindow().hide();
     
+    }
+
+    public void setLabels() {
+       characters = database.getCharacters(loggedInUser.getUsername());
+       
+       System.out.println(characters.size());
+        for (Character character : characters) {
+           charactersBox.getItems().add(character.getName());
+        }
+        
+        Character first  = characters.get(0);
+        charactersBox.setValue(first.getName());
+        
+        characterNameLabel.setText("Character name: " + first.getName());
+        characterRaceLabel.setText("Race: " + first.getRace());
+        characterClassLabel.setText("Class: " + first.getClass1());
+        characterServerLabel.setText("Server: TBA");
+        
+        charactersBox.valueProperty().addListener(new ChangeListener<String>() {
+           @Override
+           public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+               String name = charactersBox.getValue();
+               Character selectedChar = null;
+               for (Character character : characters) {
+                   if(character.getName().equals(name)){
+                      selectedChar = character;
+                   }
+                }
+                characterNameLabel.setText("Character name: " + selectedChar.getName());
+                characterRaceLabel.setText("Race: " + selectedChar.getRace());
+                characterClassLabel.setText("Class: " + selectedChar.getClass1());
+                characterServerLabel.setText("Server: TBA");
+               
+            
+               
+           }
+       });
+        
+        
+        
     }
     
 
