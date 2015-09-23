@@ -8,11 +8,22 @@ package javafx;
 import MMORPG.Database;
 import databaseEntity.User;
 import java.io.IOException;
+import java.util.Optional;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
@@ -42,18 +53,70 @@ public class UserManagement extends Application {
     @FXML
     private Label characterslotLabel;
     @FXML
-    private Label subcriptionLabel;
+    private Label subscriptionStatusLabel;
+    @FXML
+    private Button addSlotsButton;
+    @FXML
+    private Button funds5Button;
+    @FXML
+    private Button funds10Button;
+    @FXML 
+    private ChoiceBox addSubsBox;
+    @FXML
+    private ChoiceBox addSlotsChoice;
     
     @Override
     public void start(Stage primaryStage) throws Exception {  
+        checkSubscription();
         setLabels();
+    }
+    public void checkSubscription(){
+        if(loggedInUser.getMonthsPayed() != 0){
+            subscriptionStatusLabel.setText("Subscription: Active");
+        }
+        else{
+            subscriptionStatusLabel.setText("Subscription: None");
+        }
     }
     
     public void setLabels(){
-        System.out.println("x");
         usernameLabel.setText("Username: " +loggedInUser.getUsername());
         nameLabel.setText("Name: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
-        fundsLabel.setText(loggedInUser.getBalance().toString());
-        characterslotLabel.setText(loggedInUser.getCharacterSlots().toString());       
+        fundsLabel.setText("" + loggedInUser.getBalance().toString());
+        characterslotLabel.setText("Slots: " + loggedInUser.getCharacterSlots().toString());  
+        
+        addSlotsChoice.setItems(FXCollections.observableArrayList("1","2","3","4","5"));
+        addSlotsChoice.setValue("1");
+
+        
+        addSubsBox.setItems(FXCollections.observableArrayList("1 Month", "2 Months", "3 Months", "1 Year"));
+        addSubsBox.setValue("1 Month");
+    }    
+    
+    public void confirmBuySlot() {
+        String a = addSlotsChoice.getValue().toString();
+        int slotCount = Integer.parseInt(a);
+        double totalPrice = slotCount * 1.50;
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm purchase");
+        alert.setHeaderText("Buy " + slotCount  + " slots " + "for: €" + totalPrice + "0");
+        alert.setContentText("Are you sure?");
+        
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            if(checkFunds(totalPrice)){
+                System.out.println("success");
+            }else{
+                System.out.println("failed");
+            }
+        }
+        System.out.println("Buy " + slotCount  + " slots " + "for: €" + totalPrice + "0");
     }
+    
+    public boolean checkFunds(double totalPrice){
+        double funds = loggedInUser.getBalance();
+        return funds - totalPrice >= 0;
+    }
+    
 }
