@@ -11,9 +11,11 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
@@ -46,8 +48,11 @@ public class Server implements Serializable {
     private Integer maxUsers;
     @Column(name = "connected_users")
     private Integer connectedUsers;
-    @OneToMany(mappedBy = "serverAddress")
-    private Collection<Character> characterCollection;
+    @JoinTable(name = "store", joinColumns = {
+        @JoinColumn(name = "address", referencedColumnName = "address")}, inverseJoinColumns = {
+        @JoinColumn(name = "username", referencedColumnName = "username")})
+    @ManyToMany
+    private Collection<User> userCollection;
 
     public Server() {
     }
@@ -97,12 +102,12 @@ public class Server implements Serializable {
     }
 
     @XmlTransient
-    public Collection<Character> getCharacterCollection() {
-        return characterCollection;
+    public Collection<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setCharacterCollection(Collection<Character> characterCollection) {
-        this.characterCollection = characterCollection;
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

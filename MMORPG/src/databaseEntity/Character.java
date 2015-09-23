@@ -6,16 +6,19 @@
 package databaseEntity;
 
 import java.io.Serializable;
+import java.util.Collection;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
@@ -37,17 +40,16 @@ public class Character implements Serializable {
     @Column(name = "name")
     private String name;
     @Column(name = "class")
-    private Integer class1;
+    private String class1;
     @Column(name = "race")
-    private Integer race;
+    private String race;
     @Column(name = "level")
     private Integer level;
-    @JoinColumn(name = "server_address", referencedColumnName = "address")
-    @ManyToOne
-    private Server serverAddress;
-    @JoinColumn(name = "owner", referencedColumnName = "username")
-    @ManyToOne
-    private User owner;
+    @JoinTable(name = "own", joinColumns = {
+        @JoinColumn(name = "name", referencedColumnName = "name")}, inverseJoinColumns = {
+        @JoinColumn(name = "username", referencedColumnName = "username")})
+    @ManyToMany
+    private Collection<User> userCollection;
 
     public Character() {
     }
@@ -64,19 +66,19 @@ public class Character implements Serializable {
         this.name = name;
     }
 
-    public Integer getClass1() {
+    public String getClass1() {
         return class1;
     }
 
-    public void setClass1(Integer class1) {
+    public void setClass1(String class1) {
         this.class1 = class1;
     }
 
-    public Integer getRace() {
+    public String getRace() {
         return race;
     }
 
-    public void setRace(Integer race) {
+    public void setRace(String race) {
         this.race = race;
     }
 
@@ -88,20 +90,13 @@ public class Character implements Serializable {
         this.level = level;
     }
 
-    public Server getServerAddress() {
-        return serverAddress;
+    @XmlTransient
+    public Collection<User> getUserCollection() {
+        return userCollection;
     }
 
-    public void setServerAddress(Server serverAddress) {
-        this.serverAddress = serverAddress;
-    }
-
-    public User getOwner() {
-        return owner;
-    }
-
-    public void setOwner(User owner) {
-        this.owner = owner;
+    public void setUserCollection(Collection<User> userCollection) {
+        this.userCollection = userCollection;
     }
 
     @Override

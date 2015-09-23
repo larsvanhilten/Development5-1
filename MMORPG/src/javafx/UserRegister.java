@@ -62,10 +62,17 @@ public class UserRegister extends Application {
         
         }
         
-        //TODO: check if username doesnt exist already
+        User user = database.findUser(username);
+        
+        if(user.getUsername() == null){
+            database.registerUser(username, password);
+            errorLabel.setText("Registered succesfully!");
+        }else{
+            errorLabel.setText("Username already in use!");
+        }
         
         
-        database.registerUser(username, password);
+        
         
         
 

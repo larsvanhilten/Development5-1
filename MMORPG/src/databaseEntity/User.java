@@ -11,11 +11,10 @@ import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EntityManager;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -67,10 +66,10 @@ public class User implements Serializable {
     private String password;
     @Column(name = "banned")
     private Boolean banned;
-    @OneToMany(mappedBy = "owner")
+    @ManyToMany(mappedBy = "userCollection")
     private Collection<Character> characterCollection;
-    
-    private static EntityManager em;
+    @ManyToMany(mappedBy = "userCollection")
+    private Collection<Server> serverCollection;
 
     public User() {
     }
@@ -168,6 +167,15 @@ public class User implements Serializable {
         this.characterCollection = characterCollection;
     }
 
+    @XmlTransient
+    public Collection<Server> getServerCollection() {
+        return serverCollection;
+    }
+
+    public void setServerCollection(Collection<Server> serverCollection) {
+        this.serverCollection = serverCollection;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -187,4 +195,10 @@ public class User implements Serializable {
         }
         return true;
     }
+
+    @Override
+    public String toString() {
+        return "databaseEntity.User[ username=" + username + " ]";
+    }
+    
 }
