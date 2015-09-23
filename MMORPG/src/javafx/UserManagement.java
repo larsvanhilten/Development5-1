@@ -106,7 +106,10 @@ public class UserManagement extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
             if(checkFunds(totalPrice)){
-                System.out.println("success");
+                double updatedFunds = loggedInUser.getBalance() - totalPrice;
+                System.out.println(updatedFunds);
+                int updatedSlots = loggedInUser.getCharacterSlots() + slotCount;
+                database.updateCharacterSlots(loggedInUser.getUsername(), updatedFunds, updatedSlots);
             }else{
                 System.out.println("failed");
             }

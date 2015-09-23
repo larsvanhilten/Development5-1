@@ -80,4 +80,12 @@ public class Database {
         return characters;
     }
     
+    public void updateCharacterSlots(String username, double balance, int slots){
+        EntityTransaction updateTransaction = em.getTransaction();
+        updateTransaction.begin();
+        Query query = em.createQuery("UPDATE User u SET u.balance = " + balance + " WHERE u.username = :username");
+        query.setParameter("username", username);
+        System.out.println(username);
+        updateTransaction.commit();
+    }
 }
