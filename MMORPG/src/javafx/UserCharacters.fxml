@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.UserCharacters">
    <children>
-      <ChoiceBox fx:id="charactersBox" layoutX="24.0" layoutY="42.0" prefHeight="25.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="charactersBox" layoutX="24.0" layoutY="46.0" prefHeight="25.0" prefWidth="150.0" />
       <Line endY="400.0" layoutX="200.0" layoutY="34.0" startY="-35.0" />
       <Button layoutX="24.0" layoutY="355.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="New character" />
       <Label layoutX="24.0" layoutY="318.0" text="Available character slots:" />
@@ -43,7 +43,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="218.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="106.0" text="Delete character" />
+      <Button layoutX="218.0" layoutY="396.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Delete" />
       <Button fx:id="managementButton" layoutX="24.0" layoutY="396.0" mnemonicParsing="false" onAction="#openManagementWindow" prefHeight="25.0" prefWidth="150.0" text="Account management" />
    </children>
 </AnchorPane>

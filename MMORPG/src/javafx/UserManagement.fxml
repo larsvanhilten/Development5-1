@@ -8,20 +8,15 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.UserManagement">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafx.UserManagement">
   <children>
-    <Label id="subcriptionLabel" fx:id="subscriptionStatusLabel" layoutX="315.0" layoutY="75.0" text="subscriptionstatus" />
-    <Label fx:id="nameLabel" layoutX="14.0" layoutY="100.0" text="name" />
-    <Label fx:id="characterslotLabel" layoutX="188.0" layoutY="75.0" text="characterSlots" />
-    <Button fx:id="addSlotsButton" disable="false" layoutX="219.0" layoutY="105.0" mnemonicParsing="false" onMouseClicked="#confirmBuySlot" prefWidth="44.0" text="Add" />
-    <Label fx:id="fundsLabel" layoutX="499.0" layoutY="75.0" text="funds" />
-    <Label id="nameLabel" fx:id="usernameLabel" layoutX="15.0" layoutY="75.0" text="username" />
-    <Line endX="-100.0" endY="396.0" layoutX="236.0" layoutY="4.0" startX="-100.0" />
-    <Line endX="-100.0" endY="396.0" layoutX="376.0" layoutY="4.0" startX="-100.0" />
-    <Line endX="-100.0" endY="397.0" layoutX="544.0" layoutY="4.0" startX="-100.0" startY="-3.0" />
-    <Button fx:id="funds5Button" layoutX="487.0" layoutY="108.0" minHeight="17.999908447265625" mnemonicParsing="false" prefHeight="21.0" prefWidth="55.0" text="€5,-" />
-    <Button fx:id="funds10Button" layoutX="487.0" layoutY="137.0" mnemonicParsing="false" prefWidth="55.0" text="€ 10,-" />
-    <ChoiceBox id="addSubsLabel" fx:id="addSubsBox" layoutX="327.0" layoutY="108.0">
+    <Label id="subcriptionLabel" fx:id="subscriptionStatusLabel" alignment="CENTER" layoutX="313.0" layoutY="41.0" text="subscriptionstatus" />
+    <Label fx:id="firstNameLabel" layoutX="10.0" layoutY="110.0" text="firstName" />
+    <Label fx:id="characterslotLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="168.0" layoutY="41.0" text="characterSlots" />
+    <Button fx:id="addSlotsButton" disable="false" layoutX="164.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#confirmBuySlot" prefHeight="20.0" prefWidth="100.0" text="Add" />
+    <Label fx:id="fundsLabel" alignment="CENTER" layoutX="506.0" layoutY="41.0" text="funds" />
+    <Label id="nameLabel" fx:id="usernameLabel" layoutX="10.0" layoutY="60.0" text="username" />
+    <ChoiceBox id="addSubsLabel" fx:id="addSubsBox" layoutX="323.0" layoutY="70.0" prefHeight="30.0" prefWidth="100.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -30,7 +25,7 @@
         </FXCollections>
       </items>
     </ChoiceBox>
-    <ChoiceBox id="slotsChoice" fx:id="addSlotsChoice" layoutX="166.0" layoutY="105.0" prefWidth="44.0">
+    <ChoiceBox id="slotsChoice" fx:id="addSlotsChoice" layoutX="163.0" layoutY="70.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="100.0">
       <items>
         <FXCollections fx:factory="observableArrayList">
           <String fx:value="Item 1" />
@@ -39,5 +34,25 @@
         </FXCollections>
       </items>
     </ChoiceBox>
+      <Line endY="500.0" layoutX="145.0" layoutY="14.0" startY="-20.0" />
+      <Line endX="150.0" endY="500.0" layoutX="150.0" layoutY="24.0" startX="150.0" startY="-40.0" />
+      <Line endX="300.0" endY="500.0" layoutX="154.0" layoutY="34.0" startX="300.0" startY="-40.0" />
+      <ChoiceBox id="addSubsLabel" fx:id="addSubsBox1" layoutX="477.0" layoutY="70.0" prefHeight="30.0" prefWidth="100.0">
+         <items>
+            <FXCollections fx:factory="observableArrayList">
+               <String fx:value="Item 1" />
+               <String fx:value="Item 2" />
+               <String fx:value="Item 3" />
+            </FXCollections>
+         </items>
+      </ChoiceBox>
+      <Button fx:id="addSlotsButton1" disable="false" layoutX="323.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#confirmBuySlot" prefHeight="20.0" prefWidth="100.0" text="Add" />
+      <Button fx:id="addSlotsButton2" disable="false" layoutX="475.0" layoutY="121.0" mnemonicParsing="false" onMouseClicked="#confirmBuySlot" prefHeight="20.0" prefWidth="100.0" text="Add" />
+      <Label fx:id="lastNameLabel" layoutX="10.0" layoutY="160.0" text="lastName" />
+      <Label id="nameLabel" fx:id="usernameLabel1" layoutX="10.0" layoutY="40.0" text="Username:" />
+      <Label fx:id="firstNameLabel1" layoutX="10.0" layoutY="90.0" text="First name:" />
+      <Label fx:id="lastNameLabel1" layoutX="10.0" layoutY="140.0" text="Last name:" />
+      <Label fx:id="lastNameLabel11" layoutX="11.0" layoutY="190.0" text="IBAN:" />
+      <Label fx:id="ibanLabel" layoutX="11.0" layoutY="210.0" text="iban" />
   </children>
 </AnchorPane>

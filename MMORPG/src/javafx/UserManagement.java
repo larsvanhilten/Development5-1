@@ -45,9 +45,13 @@ public class UserManagement extends Application {
     }
     
     @FXML
-    private Label nameLabel;    
+    private Label firstNameLabel;  
     @FXML
-    private Label usernameLabel;    
+    private Label lastNameLabel;  
+    @FXML
+    private Label usernameLabel;
+    @FXML
+    private Label ibanLabel;
     @FXML
     private Label fundsLabel; 
     @FXML
@@ -80,8 +84,10 @@ public class UserManagement extends Application {
     }
     
     public void setLabels(){
-        usernameLabel.setText("Username: " +loggedInUser.getUsername());
-        nameLabel.setText("Name: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
+        usernameLabel.setText(loggedInUser.getUsername());
+        firstNameLabel.setText(loggedInUser.getFirstName());
+        lastNameLabel.setText(loggedInUser.getLastName());
+        ibanLabel.setText(loggedInUser.getIban());
         fundsLabel.setText("" + loggedInUser.getBalance().toString());
         characterslotLabel.setText("Slots: " + loggedInUser.getCharacterSlots().toString());  
         
@@ -104,7 +110,7 @@ public class UserManagement extends Application {
         alert.setContentText("Are you sure?");
         
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.get() == ButtonType.OK){
+        if(result.equals(ButtonType.OK)){
             if(checkFunds(totalPrice)){
                 double updatedFunds = loggedInUser.getBalance() - totalPrice;
                 System.out.println(updatedFunds);
