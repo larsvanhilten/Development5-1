@@ -43,12 +43,14 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button layoutX="218.0" layoutY="396.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="85.0" text="Delete" />
+      <Button fx:id="deleteCharacterButton" layoutX="218.0" layoutY="396.0" mnemonicParsing="false" onAction="#deleteCharacter" prefHeight="31.0" prefWidth="85.0" text="Delete" />
       <Button fx:id="managementButton" layoutX="24.0" layoutY="396.0" mnemonicParsing="false" onAction="#openManagementWindow" prefHeight="25.0" prefWidth="150.0" text="Manage Account" />
       <Label fx:id="characterLevelLabel" layoutX="220.0" layoutY="166.0" text="Level:">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
+      <TextField fx:id="characterNameInput" disable="true" layoutX="24.0" layoutY="123.0" prefHeight="31.0" prefWidth="150.0" />
+      <Label layoutX="24.0" layoutY="101.0" text="Name" />
    </children>
 </AnchorPane>

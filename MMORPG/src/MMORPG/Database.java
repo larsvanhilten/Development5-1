@@ -42,7 +42,7 @@ public class Database {
         return user;
     }
     
-    public User registerUser(String username, String password, String firstName, String lastName, String iban){
+    public void registerUser(String username, String password, String firstName, String lastName, String iban){
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);  
@@ -66,7 +66,7 @@ public class Database {
         } finally {
         em.close();
         }
-        return user;
+        
     }     
     
     public List<Character> getCharacters(String username){
@@ -89,4 +89,29 @@ public class Database {
         System.out.println(username);
         updateTransaction.commit();
     }
+    
+    public void addCharacter(Character newCharacter, User user){
+        Character character = newCharacter;
+        
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        
+        try{
+        em.persist(character);
+        transaction.commit();
+        em.getTransaction().begin();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+         
+        }
+        user.getCharacterCollection().add(character);
+        character.getUserCollection().add(user);
+        em.merge(character);
+        em.merge(user);
+        transaction.commit();
+    
+    }
+    
+    
 }
