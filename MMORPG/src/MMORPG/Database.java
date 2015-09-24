@@ -42,12 +42,13 @@ public class Database {
         return user;
     }
     
-    public User registerUser(String username, String password, String firstName, String lastName){
+    public User registerUser(String username, String password, String firstName, String lastName, String iban){
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);  
         user.setFirstName(firstName);
         user.setLastName(lastName);
+        user.setIban(iban);
         user.setBalance(0.0);
         user.setBanned(false);
         user.setCharacterSlots(5);

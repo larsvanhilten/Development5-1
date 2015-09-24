@@ -35,6 +35,8 @@ public class UserRegister extends Application {
     @FXML
     private TextField lastNameInput;
     @FXML
+    private TextField ibanInput;
+    @FXML
     private Button registerButton;
     @FXML
     private Label errorLabel;
@@ -56,8 +58,9 @@ public class UserRegister extends Application {
         String passwordVerification = passwordVerificationInput.getText();
         String firstName = firstNameInput.getText();
         String lastName = lastNameInput.getText();
+        String iban = ibanInput.getText();
         
-        if(username.equals("") || password.equals("")){
+        if(username.equals("") || password.equals("") || firstName.equals("") || lastName.equals("") || iban.equals("")){
             errorLabel.setText("There are empty fields!");
             return;
         }
@@ -71,7 +74,7 @@ public class UserRegister extends Application {
         User user = database.findUser(username);
         
         if(user.getUsername() == null){
-            database.registerUser(username, password, firstName, lastName);
+            database.registerUser(username, password, firstName, lastName, iban);
             errorLabel.setText("Registered succesfully!");
         }else{
             errorLabel.setText("Username already in use!");

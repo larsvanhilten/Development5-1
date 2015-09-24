@@ -55,12 +55,15 @@ public class UserCharacters extends Application {
     @FXML
     private Label characterServerLabel;
     @FXML
+    private Label characterLevelLabel;
+    @FXML
     private Button deleteCharacterButton;
     @FXML
     
     private Button ConnectServerButton;
     private Database database;
     private List<databaseEntity.Character> characters;
+    private Character selectedChar = null;
 
     public void setDatabase(Database database) {
         this.database = database;
@@ -110,13 +113,14 @@ public class UserCharacters extends Application {
         characterNameLabel.setText("Character name: " + first.getName());
         characterRaceLabel.setText("Race: " + first.getRace());
         characterClassLabel.setText("Class: " + first.getClass1());
+        characterLevelLabel.setText("Level: " + first.getLevel());
         characterServerLabel.setText("Server: TBA");
+        characterSlotsLabel.setText("Available slots: " + loggedInUser.getCharacterSlots());
         
         charactersBox.valueProperty().addListener(new ChangeListener<String>() {
            @Override
            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                String name = charactersBox.getValue();
-               Character selectedChar = null;
                for (Character character : characters) {
                    if(character.getName().equals(name)){
                       selectedChar = character;
@@ -125,18 +129,37 @@ public class UserCharacters extends Application {
                 characterNameLabel.setText("Character name: " + selectedChar.getName());
                 characterRaceLabel.setText("Race: " + selectedChar.getRace());
                 characterClassLabel.setText("Class: " + selectedChar.getClass1());
+                characterLevelLabel.setText("Level: " + selectedChar.getLevel());
                 characterServerLabel.setText("Server: TBA");
+                
+                
                
             
                
            }
        });
-        
-        
+        //raceBox.setDisable(true);
+        raceBox.setItems(FXCollections.observableArrayList("Human", "Orc", "Midget", "Pepe", "Fairy"));
+        raceBox.setValue("Human");
+        classBox.setItems(FXCollections.observableArrayList("Warrior", "Hunter", "Warlock", "Runner", "Magician", "Brute"));
+        classBox.setValue("Warrior");
+        serverBox.setItems(FXCollections.observableArrayList("Server EU", "Server US", "Server ASIA"));
+        serverBox.setValue("Server EU");
+    }
+    
+    public void createCharacter(){
+        raceBox.setDisable(false);
+        classBox.setDisable(false);
+        serverBox.setDisable(false);
+        newCharacterButton.setText("Create Character");
+            
         
     }
     
-
+    public void deleteCharacter(){
+    
+    
+    }
 
     
 }
