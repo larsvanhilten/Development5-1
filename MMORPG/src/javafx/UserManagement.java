@@ -59,11 +59,7 @@ public class UserManagement extends Application {
     @FXML
     private Label subscriptionStatusLabel;
     @FXML
-    private Button addSlotsButton;
-    @FXML
-    private Button funds5Button;
-    @FXML
-    private Button funds10Button;
+    private ChoiceBox addFundsBox;
     @FXML 
     private ChoiceBox addSubsBox;
     @FXML
@@ -88,15 +84,17 @@ public class UserManagement extends Application {
         firstNameLabel.setText(loggedInUser.getFirstName());
         lastNameLabel.setText(loggedInUser.getLastName());
         ibanLabel.setText(loggedInUser.getIban());
-        fundsLabel.setText("" + loggedInUser.getBalance().toString());
+        fundsLabel.setText("Balance: €" + loggedInUser.getBalance().toString());
         characterslotLabel.setText("Slots: " + loggedInUser.getCharacterSlots().toString());  
         
         addSlotsChoice.setItems(FXCollections.observableArrayList("1","2","3","4","5"));
         addSlotsChoice.setValue("1");
 
-        
         addSubsBox.setItems(FXCollections.observableArrayList("1 Month", "2 Months", "3 Months", "1 Year"));
         addSubsBox.setValue("1 Month");
+        
+        addFundsBox.setItems(FXCollections.observableArrayList("€5,-", "€10,-", "€20,-"));
+        addFundsBox.setValue("€5,-");
     }    
     
     public void confirmBuySlot() {
@@ -116,12 +114,27 @@ public class UserManagement extends Application {
                 int updatedSlots = loggedInUser.getCharacterSlots() + slotCount;
                 database.updateBalance(loggedInUser.getUsername(), updatedBalance);
                 database.updateCharacterSlots(loggedInUser.getUsername(), updatedSlots);
+                loggedInUser.setBalance(updatedBalance);
+                loggedInUser.setCharacterSlots(updatedSlots);
                 setLabels();
-            }else{
-                System.out.println("failed");
+            }
+            else{
+                Alert alertError = new Alert(AlertType.ERROR);
+                alertError.setTitle("ERROR");
+                alertError.setContentText("The transaction could not be completed due to insufficient balance.");
+                Optional<ButtonType> resultError = alertError.showAndWait();
             }
         }
-        System.out.println("Buy " + slotCount  + " slots " + "for: €" + totalPrice + "0");
+    }
+    
+    public void confirmBuyFunds(){
+        String a = addFundsBox.getValue().toString().split();
+        int fundsAdded = Integer.parseInt(a);
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm purchase");
+        alert.setHeaderText("You are about to add: €" + fundsAdded);
+        alert.setContentText("Are you sure?");
     }
     
     public boolean checkFunds(double totalPrice){
