@@ -10,6 +10,7 @@ import databaseEntity.User;
 import databaseEntity.Character;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -17,7 +18,9 @@ import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -101,14 +104,13 @@ public class UserCharacters extends Application {
     }
 
     public void setLabels() {
-       characters = database.getCharacters(loggedInUser.getUsername());
+        characters = database.getCharacters(loggedInUser.getUsername());
        
-       System.out.println(characters.size());
         charactersBox.getItems().clear();
         for (Character character : characters) {
            charactersBox.getItems().add(character.getName());
         }
-        
+        if(characters.size() > 0){
         Character first  = characters.get(0);
         charactersBox.setValue(first.getName());
         
@@ -117,9 +119,13 @@ public class UserCharacters extends Application {
         characterClassLabel.setText("Class: " + first.getClass1());
         characterLevelLabel.setText("Level: " + first.getLevel());
         characterServerLabel.setText("Server: TBA");
+        }
         characterSlotsLabel.setText("Available slots: " + loggedInUser.getCharacterSlots());
         
         
+        if(loggedInUser.getCharacterSlots() < 1){
+           newCharacterButton.setDisable(true);
+        }
         //raceBox.setDisable(true);
         raceBox.setItems(FXCollections.observableArrayList("Human", "Orc", "Midget", "Pepe", "Fairy"));
         raceBox.setValue("Human");
@@ -129,7 +135,7 @@ public class UserCharacters extends Application {
         serverBox.setValue("Server EU");
     }
     
-    public void createCharacter(){
+    public void createCharacter(){    
         if(newCharacterButton.getText().equals("New character")){
         characterNameInput.setDisable(false);
         raceBox.setDisable(false);
@@ -145,6 +151,8 @@ public class UserCharacters extends Application {
         newCharacter.setClass1(classBox.getValue().toString());
         
         database.addCharacter(newCharacter, loggedInUser);
+        database.updateCharacterSlots(loggedInUser.getUsername(), loggedInUser.getCharacterSlots() - 1);
+        loggedInUser.setCharacterSlots(loggedInUser.getCharacterSlots() - 1);
         setLabels();
         }
         
@@ -153,8 +161,19 @@ public class UserCharacters extends Application {
     }
     
     public void deleteCharacter(){
+        if(!(charactersBox.getValue() == null)){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirm delete character");
+        alert.setHeaderText("You are about to delete the character named: " + charactersBox.getValue());
+        alert.setContentText("Are you sure?");
         
-    
+        Optional<ButtonType> result = alert.showAndWait();
+        if(result.get() == ButtonType.OK){
+            database.deleteCharacter(charactersBox.getValue());
+            setLabels();
+        
+             }
+        }
     }
 
     private void setEventListener() {

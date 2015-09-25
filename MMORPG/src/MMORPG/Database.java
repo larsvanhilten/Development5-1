@@ -125,5 +125,16 @@ public class Database {
     
     }
     
+    public void deleteCharacter(String characterName){
+        EntityTransaction updateTransaction = em.getTransaction();
+        updateTransaction.begin();
+        Query query = em.createQuery("DELETE FROM Character WHERE name = :characterName");
+        query.setParameter("characterName", characterName);
+        query.executeUpdate();
+        updateTransaction.commit();
+    
+    
+    }
+    
     
 }

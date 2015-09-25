@@ -13,13 +13,13 @@
    <children>
       <ChoiceBox fx:id="charactersBox" layoutX="24.0" layoutY="46.0" prefHeight="25.0" prefWidth="150.0" />
       <Line endY="500.0" layoutX="200.0" layoutY="34.0" startY="-50.0" />
-      <Button fx:id="newCharacterButton" layoutX="24.0" layoutY="355.0" mnemonicParsing="false" onAction="#createCharacter" prefHeight="25.0" prefWidth="150.0" text="New character" />
+      <Button fx:id="newCharacterButton" layoutX="24.0" layoutY="365.0" mnemonicParsing="false" onAction="#createCharacter" prefHeight="25.0" prefWidth="150.0" text="New character" />
       <Label fx:id="characterSlotsLabel" layoutX="24.0" layoutY="318.0" text="Available character slots:" />
-      <Button layoutX="436.0" layoutY="396.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Connect to server" />
-      <ChoiceBox fx:id="raceBox" disable="true" layoutX="24.0" layoutY="174.0" prefWidth="150.0" />
+      <Button layoutX="436.0" layoutY="405.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Connect to server" />
+      <ChoiceBox fx:id="raceBox" disable="true" layoutX="24.0" layoutY="176.0" prefWidth="150.0" />
       <ChoiceBox fx:id="classBox" disable="true" layoutX="24.0" layoutY="228.0" prefWidth="150.0" />
       <Label layoutX="24.0" layoutY="24.0" text="Characters" />
-      <Label layoutX="24.0" layoutY="153.0" text="Race" />
+      <Label layoutX="24.0" layoutY="156.0" text="Race" />
       <Label layoutX="24.0" layoutY="207.0" text="Class" />
       <Label fx:id="characterNameLabel" layoutX="220.0" layoutY="34.0" text="Character name: ">
          <font>
@@ -43,8 +43,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="deleteCharacterButton" layoutX="218.0" layoutY="396.0" mnemonicParsing="false" onAction="#deleteCharacter" prefHeight="31.0" prefWidth="85.0" text="Delete" />
-      <Button fx:id="managementButton" layoutX="24.0" layoutY="396.0" mnemonicParsing="false" onAction="#openManagementWindow" prefHeight="25.0" prefWidth="150.0" text="Manage Account" />
+      <Button fx:id="deleteCharacterButton" layoutX="218.0" layoutY="405.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#deleteCharacter" prefHeight="25.0" prefWidth="85.0" text="Delete" />
+      <Button fx:id="managementButton" layoutX="24.0" layoutY="405.0" mnemonicParsing="false" onAction="#openManagementWindow" prefHeight="25.0" prefWidth="150.0" text="Manage Account" />
       <Label fx:id="characterLevelLabel" layoutX="220.0" layoutY="166.0" text="Level:">
          <font>
             <Font size="20.0" />

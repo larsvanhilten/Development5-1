@@ -128,7 +128,7 @@ public class UserManagement extends Application {
     }
     
     public void confirmBuyFunds(){
-        String a = addFundsBox.getValue().toString().split();
+        String a = addFundsBox.getValue().toString();
         int fundsAdded = Integer.parseInt(a);
         
         Alert alert = new Alert(AlertType.CONFIRMATION);
