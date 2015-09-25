@@ -110,12 +110,13 @@ public class UserManagement extends Application {
         alert.setContentText("Are you sure?");
         
         Optional<ButtonType> result = alert.showAndWait();
-        if(result.equals(ButtonType.OK)){
+        if(result.get() == ButtonType.OK){
             if(checkFunds(totalPrice)){
-                double updatedFunds = loggedInUser.getBalance() - totalPrice;
-                System.out.println(updatedFunds);
+                double updatedBalance = loggedInUser.getBalance() - totalPrice;
                 int updatedSlots = loggedInUser.getCharacterSlots() + slotCount;
-                database.updateCharacterSlots(loggedInUser.getUsername(), updatedFunds, updatedSlots);
+                database.updateBalance(loggedInUser.getUsername(), updatedBalance);
+                database.updateCharacterSlots(loggedInUser.getUsername(), updatedSlots);
+                setLabels();
             }else{
                 System.out.println("failed");
             }

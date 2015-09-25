@@ -25,6 +25,7 @@ public class Database {
      @PersistenceContext(unitName = "MMORPGPU", type = PersistenceContextType.EXTENDED)
      private static EntityManager em;
      
+     
     public Database(){
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("MMORPGPU");
         em = emf.createEntityManager();
@@ -77,16 +78,27 @@ public class Database {
         characters = query.getResultList();
         }catch(Exception e){   
         }
-    
         return characters;
     }
     
-    public void updateCharacterSlots(String username, double balance, int slots){
+    public void updateCharacterSlots(String username, int slots){
         EntityTransaction updateTransaction = em.getTransaction();
         updateTransaction.begin();
-        Query query = em.createQuery("UPDATE User u SET u.balance = " + balance + " WHERE u.username = :username");
+        Query query = em.createQuery("UPDATE User u SET u.characterSlots = :slots WHERE u.username = :username");
+        query.setParameter("slots", slots);
         query.setParameter("username", username);
+        query.executeUpdate();
         System.out.println(username);
+        updateTransaction.commit();
+    }
+    
+    public void updateBalance(String username, double balance){
+        EntityTransaction updateTransaction = em.getTransaction();
+        updateTransaction.begin();
+        Query query = em.createQuery("UPDATE User u SET u.balance = :balance WHERE u.username = :username");
+        query.setParameter("balance", balance);
+        query.setParameter("username", username);
+        query.executeUpdate();
         updateTransaction.commit();
     }
     
