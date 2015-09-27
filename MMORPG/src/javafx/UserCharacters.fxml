@@ -15,7 +15,7 @@
       <Line endY="500.0" layoutX="200.0" layoutY="34.0" startY="-50.0" />
       <Button fx:id="newCharacterButton" layoutX="24.0" layoutY="365.0" mnemonicParsing="false" onAction="#createCharacter" prefHeight="25.0" prefWidth="150.0" text="New character" />
       <Label fx:id="characterSlotsLabel" layoutX="24.0" layoutY="318.0" text="Available character slots:" />
-      <Button layoutX="436.0" layoutY="405.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" text="Connect to server" />
+      <Button fx:id="connectServerButton" layoutX="436.0" layoutY="405.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connectToServer" prefHeight="25.0" prefWidth="150.0" text="Connect to server" />
       <ChoiceBox fx:id="raceBox" disable="true" layoutX="24.0" layoutY="176.0" prefWidth="150.0" />
       <ChoiceBox fx:id="classBox" disable="true" layoutX="24.0" layoutY="228.0" prefWidth="150.0" />
       <Label layoutX="24.0" layoutY="24.0" text="Characters" />

@@ -25,6 +25,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
@@ -142,4 +143,19 @@ public class UserManagement extends Application {
         return funds - totalPrice >= 0;
     }
     
+    public void backToCharacterMenu() throws IOException {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserCharacters.fxml"));
+        Stage stage = new Stage();
+        stage.setScene(new Scene((Pane) loader.load()));
+        stage.setResizable(false);
+        stage.centerOnScreen();
+        stage.setTitle("MMORPG Characters");
+        UserCharacters userCharacters = loader.<UserCharacters>getController();
+        userCharacters.setLoggedInUser(loggedInUser);
+        userCharacters.setDatabase(database);
+        userCharacters.start(stage);
+        stage.show();
+        addFundsBox.getScene().getWindow().hide();
+    
+    }
 }

@@ -63,7 +63,7 @@ public class UserCharacters extends Application {
     private Button deleteCharacterButton;
     @FXML
     
-    private Button ConnectServerButton;
+    private Button connectServerButton;
     private Database database;
     private List<databaseEntity.Character> characters;
     private Character selectedChar = null;
@@ -143,7 +143,14 @@ public class UserCharacters extends Application {
         serverBox.setDisable(false);
         newCharacterButton.setText("Create Character");
         }else{
-        
+        if(characterNameInput.getText().equals("")){
+            Alert alertError = new Alert(Alert.AlertType.ERROR);
+            alertError.setTitle("ERROR");
+            alertError.setContentText("Please enter a name for the character!");
+            Optional<ButtonType> resultError = alertError.showAndWait();
+            return;
+        }
+         
         Character newCharacter = new Character();
         newCharacter.setLevel(1);
         newCharacter.setName(characterNameInput.getText());
@@ -170,6 +177,8 @@ public class UserCharacters extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         if(result.get() == ButtonType.OK){
             database.deleteCharacter(charactersBox.getValue());
+            database.updateCharacterSlots(loggedInUser.getUsername(), loggedInUser.getCharacterSlots() + 1);
+            loggedInUser.setCharacterSlots(loggedInUser.getCharacterSlots() + 1);
             setLabels();
         
              }
@@ -194,6 +203,11 @@ public class UserCharacters extends Application {
                           
            }
        });
+    }
+    
+    public void connectToServer(){
+        
+    
     }
 
     
