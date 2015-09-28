@@ -7,7 +7,10 @@ package MMORPG;
 
 import databaseEntity.User;
 import databaseEntity.Character;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -97,6 +100,19 @@ public class Database {
         updateTransaction.begin();
         Query query = em.createQuery("UPDATE User u SET u.balance = :balance WHERE u.username = :username");
         query.setParameter("balance", balance);
+        query.setParameter("username", username);
+        query.executeUpdate();
+        updateTransaction.commit();
+    }
+    
+    public void updateSubscription(String username, int monthsPayed){
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Date date = new Date();
+        EntityTransaction updateTransaction = em.getTransaction();
+        updateTransaction.begin();
+        Query query = em.createQuery("UPDATE User u SET u.monthsPayed = :monthsPayed, u.lastPayment = :lastPayment WHERE u.username = :username");
+        query.setParameter("monthsPayed", monthsPayed);
+        query.setParameter("lastPayment", date);
         query.setParameter("username", username);
         query.executeUpdate();
         updateTransaction.commit();

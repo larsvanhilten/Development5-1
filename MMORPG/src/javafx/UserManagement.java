@@ -119,7 +119,7 @@ public class UserManagement extends Application {
                 loggedInUser.setCharacterSlots(updatedSlots);
                 setLabels();
             }
-            else{
+            else{ 
                 Alert alertError = new Alert(AlertType.ERROR);
                 alertError.setTitle("ERROR");
                 alertError.setContentText("The transaction could not be completed due to insufficient balance.");
@@ -128,14 +128,55 @@ public class UserManagement extends Application {
         }
     }
     
-    public void confirmBuyFunds(){
+    public void confirmBuySubscription(){
+        int subsTime = 0;
+        String a = addSubsBox.getValue().toString();
+        if(a.equals("1 Month")){
+            subsTime = 1;
+        }else if(a.equals("2 Months")){
+            subsTime = 2;
+        }else if(a.equals("3 Months")){
+            subsTime = 3;
+        }else if(a.equals("1 Year")){
+            subsTime = 12;
+        }
+        
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirm subscription");
+        alert.setHeaderText("You are about to add: " + a +" of subscription");
+        alert.setContentText("Are you sure?");
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == ButtonType.OK){
+            database.updateSubscription(loggedInUser.getUsername(), subsTime);
+        }
+
+    }
+    
+    public void confirmBuyFunds() throws InterruptedException{
         String a = addFundsBox.getValue().toString();
-        int fundsAdded = Integer.parseInt(a);
+        String split1 = a.replace("€", "");
+        String split2 = split1.replace(",-", "");
+        int fundsAdded = Integer.parseInt(split2);
         
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm purchase");
         alert.setHeaderText("You are about to add: €" + fundsAdded);
         alert.setContentText("Are you sure?");
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        if(result.get() == ButtonType.OK){
+            Alert alertProcessing = new Alert(AlertType.WARNING);
+            alertProcessing.setTitle("Processing...");
+            alertProcessing.setContentText("Transfering money from bank account..");
+            Optional<ButtonType> result1 = alertProcessing.showAndWait(); 
+            
+            double updatedBalance = loggedInUser.getBalance() + fundsAdded;
+            database.updateBalance(loggedInUser.getUsername(), updatedBalance);
+            loggedInUser.setBalance(updatedBalance);
+            setLabels();
+            alertProcessing.hide();
+        }
     }
     
     public boolean checkFunds(double totalPrice){
