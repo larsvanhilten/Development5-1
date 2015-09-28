@@ -152,5 +152,22 @@ public class Database {
     
     }
     
+    public boolean checkCharacter(String characterName){
+        boolean charExists = false;
+        try{
+        Query query = em.createNamedQuery("Character.findByName");
+        query.setParameter("name", characterName);
+        Character character = (Character) query.getSingleResult();
+        
+        if(character.getName().equals(characterName.toUpperCase())){
+            charExists = true;
+        }
+        
+        }catch(Exception e){   
+        }
+        
+        
+        return charExists;
     
+    }
 }
