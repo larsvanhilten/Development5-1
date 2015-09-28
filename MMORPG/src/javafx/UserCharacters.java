@@ -140,22 +140,37 @@ public class UserCharacters extends Application {
         characterNameInput.setDisable(false);
         raceBox.setDisable(false);
         classBox.setDisable(false);
-        serverBox.setDisable(false);
         newCharacterButton.setText("Create Character");
         }else{
-        if(characterNameInput.getText().equals("")){
+        String charName = characterNameInput.getText().toUpperCase();
+        String charRace = raceBox.getValue().toString();
+        String charClass = classBox.getValue().toString();
+            
+            
+        if(charName.equals("")){
             Alert alertError = new Alert(Alert.AlertType.ERROR);
             alertError.setTitle("ERROR");
             alertError.setContentText("Please enter a name for the character!");
             Optional<ButtonType> resultError = alertError.showAndWait();
             return;
         }
-         
+        
+        if(database.checkCharacter(charName)){
+            Alert alertError = new Alert(Alert.AlertType.ERROR);
+            alertError.setTitle("ERROR");
+            alertError.setContentText("This character name is already in use!");
+            Optional<ButtonType> resultError = alertError.showAndWait();
+            return;
+        }
+        
         Character newCharacter = new Character();
         newCharacter.setLevel(1);
-        newCharacter.setName(characterNameInput.getText());
-        newCharacter.setRace(raceBox.getValue().toString());
-        newCharacter.setClass1(classBox.getValue().toString());
+        newCharacter.setName(charName);
+        newCharacter.setRace(charRace);
+        newCharacter.setClass1(charClass);
+        
+        
+        
         
         database.addCharacter(newCharacter, loggedInUser);
         database.updateCharacterSlots(loggedInUser.getUsername(), loggedInUser.getCharacterSlots() - 1);
@@ -185,6 +200,7 @@ public class UserCharacters extends Application {
         }
     }
 
+    
     private void setEventListener() {
         charactersBox.valueProperty().addListener(new ChangeListener<String>() {
            @Override
@@ -204,6 +220,7 @@ public class UserCharacters extends Application {
            }
        });
     }
+    
     
     public void connectToServer(){
         

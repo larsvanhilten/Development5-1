@@ -53,7 +53,7 @@ public class UserRegister extends Application {
     
     }
     public void onRegisterButton(){
-        String username = usernameInput.getText();
+        String username = usernameInput.getText().toLowerCase();
         String password = passwordInput.getText();
         String passwordVerification = passwordVerificationInput.getText();
         String firstName = firstNameInput.getText();

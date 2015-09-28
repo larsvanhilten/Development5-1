@@ -13,8 +13,8 @@
    <children>
       <ChoiceBox fx:id="charactersBox" layoutX="24.0" layoutY="46.0" prefHeight="25.0" prefWidth="150.0" />
       <Line endY="500.0" layoutX="200.0" layoutY="34.0" startY="-50.0" />
-      <Button fx:id="newCharacterButton" layoutX="24.0" layoutY="365.0" mnemonicParsing="false" onAction="#createCharacter" prefHeight="25.0" prefWidth="150.0" text="New character" />
-      <Label fx:id="characterSlotsLabel" layoutX="24.0" layoutY="318.0" text="Available character slots:" />
+      <Button fx:id="newCharacterButton" layoutX="24.0" layoutY="280.0" mnemonicParsing="false" onAction="#createCharacter" prefHeight="25.0" prefWidth="150.0" text="New character" />
+      <Label fx:id="characterSlotsLabel" layoutX="24.0" layoutY="262.0" text="Available character slots:" />
       <Button fx:id="connectServerButton" layoutX="436.0" layoutY="405.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#connectToServer" prefHeight="25.0" prefWidth="150.0" text="Connect to server" />
       <ChoiceBox fx:id="raceBox" disable="true" layoutX="24.0" layoutY="176.0" prefWidth="150.0" />
       <ChoiceBox fx:id="classBox" disable="true" layoutX="24.0" layoutY="228.0" prefWidth="150.0" />
@@ -36,8 +36,8 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Label layoutX="24.0" layoutY="259.0" text="Server" />
-      <ChoiceBox fx:id="serverBox" disable="true" layoutX="24.0" layoutY="280.0" prefWidth="150.0" />
+      <Label layoutX="436.0" layoutY="352.0" text="Server" />
+      <ChoiceBox fx:id="serverBox" layoutX="436.0" layoutY="373.0" prefWidth="150.0" />
       <Label fx:id="characterServerLabel" layoutX="220.0" layoutY="203.0" text="Server:">
          <font>
             <Font size="20.0" />
