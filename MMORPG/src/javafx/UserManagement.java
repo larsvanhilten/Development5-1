@@ -141,6 +141,7 @@ public class UserManagement extends Application {
             subsTime = 12;
         }
         
+        int subsTimeNew = subsTime + loggedInUser.getMonthsPayed();
         Alert alert = new Alert(AlertType.CONFIRMATION);
         alert.setTitle("Confirm subscription");
         alert.setHeaderText("You are about to add: " + a +" of subscription");
@@ -148,7 +149,7 @@ public class UserManagement extends Application {
         Optional<ButtonType> result = alert.showAndWait();
         
         if(result.get() == ButtonType.OK){
-            database.updateSubscription(loggedInUser.getUsername(), subsTime);
+            database.updateSubscription(loggedInUser.getUsername(), subsTimeNew);
         }
 
     }
