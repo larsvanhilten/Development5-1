@@ -134,7 +134,7 @@ public class UserCharacters extends Application {
         classBox.setItems(FXCollections.observableArrayList("Warrior", "Hunter", "Warlock", "Runner", "Magician", "Brute"));
         classBox.setValue("Warrior");
         serverBox.setItems(FXCollections.observableArrayList("EU", "US", "ASIA"));
-        serverBox.setValue("Server EU");
+        serverBox.setValue("EU");
     }
     
     public void createCharacter(){    
@@ -229,22 +229,28 @@ public class UserCharacters extends Application {
     public void connectToServer(){
         String serverName = serverBox.getValue().toString();
         Server server = database.getServer(serverName);
+        int maxUsers = server.getMaxUsers();
+        int connectedUsers = server.getConnectedUsers();
+        if(connectedUsers >= maxUsers){
+            Alert alertError = new Alert(Alert.AlertType.ERROR);
+            alertError.setTitle("ERROR");
+            alertError.setContentText("This server is full!");
+            Optional<ButtonType> resultError = alertError.showAndWait();
+        }else{
         database.connectToServer(loggedInUser, server);
+        
         
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Connected to the server");
         alert.setHeaderText("You are now connected to the server.");
         alert.setContentText("Press the 'Disconnect' button if you wish to disconnect.");
-
         ButtonType disconnectButton = new ButtonType("Disconnect");
-
         alert.getButtonTypes().setAll(disconnectButton);
-
         Optional<ButtonType> result = alert.showAndWait();
-        
-        //drop row
+        server = database.getServer(serverName);
         database.deleteConnection(loggedInUser, server);
         
+        }
         
     }
 

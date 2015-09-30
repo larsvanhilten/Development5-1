@@ -194,6 +194,7 @@ public class Database {
         em.merge(server);
         em.merge(user);
         transaction.commit();
+        updateConnectedUsers(server, 1);
     }
     
     public void deleteConnection(User user, Server server){
@@ -204,7 +205,21 @@ public class Database {
         em.merge(user);
         em.merge(server);
         transaction.commit();
+        updateConnectedUsers(server, 0);
     
+    }
+    
+    private void updateConnectedUsers(Server server, int updateCount){
+        EntityTransaction updateTransaction = em.getTransaction();
+        updateTransaction.begin();
+        Query query = em.createQuery("UPDATE Server s SET s.connectedUsers = :userCount WHERE s.name = :name");
+        int userCount = server.getConnectedUsers() + updateCount;
+        String serverName = server.getName();
+        query.setParameter("userCount", userCount);
+        query.setParameter("name", serverName);
+        query.executeUpdate();
+        updateTransaction.commit();
+        
     }
 }
 
