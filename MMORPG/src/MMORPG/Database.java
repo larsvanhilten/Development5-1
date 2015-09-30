@@ -7,6 +7,7 @@ package MMORPG;
 
 import databaseEntity.User;
 import databaseEntity.Character;
+import databaseEntity.Server;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -170,4 +171,41 @@ public class Database {
         return charExists;
     
     }
+    
+    public Server getServer(String serverName){
+        try{
+        Query query = em.createNamedQuery("Server.findByName");
+        query.setParameter("name", serverName);
+        Server server = (Server) query.getSingleResult();
+        return server;
+        }catch(Exception e){   
+        }
+       
+        return null;
+        
+    }
+    //Server.findByName
+    
+    public void connectToServer(User user, Server server){
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        user.getServerCollection().add(server);
+        server.getUserCollection().add(user);
+        em.merge(server);
+        em.merge(user);
+        transaction.commit();
+    }
+    
+    public void deleteConnection(User user, Server server){
+        EntityTransaction transaction = em.getTransaction();
+        transaction.begin();
+        user.getServerCollection().remove(server);
+        server.getUserCollection().remove(user);
+        em.merge(user);
+        em.merge(server);
+        transaction.commit();
+    
+    }
 }
+
+

@@ -72,6 +72,7 @@ public class User implements Serializable {
     private Collection<Server> serverCollection;
 
     public User() {
+        
     }
 
     public User(String username) {
@@ -200,5 +201,6 @@ public class User implements Serializable {
     public String toString() {
         return "databaseEntity.User[ username=" + username + " ]";
     }
+    
     
 }

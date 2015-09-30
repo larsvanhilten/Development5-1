@@ -8,9 +8,11 @@ package javafx;
 import MMORPG.Database;
 import databaseEntity.User;
 import databaseEntity.Character;
+import databaseEntity.Server;
 import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -131,7 +133,7 @@ public class UserCharacters extends Application {
         raceBox.setValue("Human");
         classBox.setItems(FXCollections.observableArrayList("Warrior", "Hunter", "Warlock", "Runner", "Magician", "Brute"));
         classBox.setValue("Warrior");
-        serverBox.setItems(FXCollections.observableArrayList("Server EU", "Server US", "Server ASIA"));
+        serverBox.setItems(FXCollections.observableArrayList("EU", "US", "ASIA"));
         serverBox.setValue("Server EU");
     }
     
@@ -163,8 +165,10 @@ public class UserCharacters extends Application {
             return;
         }
         
+        int charLevel = randomLevel();
+        
         Character newCharacter = new Character();
-        newCharacter.setLevel(1);
+        newCharacter.setLevel(charLevel);
         newCharacter.setName(charName);
         newCharacter.setRace(charRace);
         newCharacter.setClass1(charClass);
@@ -223,8 +227,33 @@ public class UserCharacters extends Application {
     
     
     public void connectToServer(){
+        String serverName = serverBox.getValue().toString();
+        Server server = database.getServer(serverName);
+        database.connectToServer(loggedInUser, server);
         
-    
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Connected to the server");
+        alert.setHeaderText("You are now connected to the server.");
+        alert.setContentText("Press the 'Disconnect' button if you wish to disconnect.");
+
+        ButtonType disconnectButton = new ButtonType("Disconnect");
+
+        alert.getButtonTypes().setAll(disconnectButton);
+
+        Optional<ButtonType> result = alert.showAndWait();
+        
+        //drop row
+        database.deleteConnection(loggedInUser, server);
+        
+        
+    }
+
+    private int randomLevel() {
+        Random r = new Random();
+        int Low = 1;
+        int High = 101;
+        int randomNumber = r.nextInt(High-Low) + Low;
+        return randomNumber;
     }
 
     
