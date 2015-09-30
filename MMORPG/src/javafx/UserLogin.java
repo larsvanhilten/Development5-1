@@ -41,6 +41,8 @@ public class UserLogin extends Application {
     private Label errorLabel;
     @FXML
     private Label registerLink;
+    @FXML
+    private Button addDataButton;
     
     private static Database database;
     
@@ -128,4 +130,9 @@ public class UserLogin extends Application {
     
     }
 
+    
+    public void addData(){
+        
+        
+    }
 }
