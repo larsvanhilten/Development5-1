@@ -6,15 +6,15 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.UserLogin">
+<AnchorPane disable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="javafx.UserLogin">
   <children>
     <TextField fx:id="usernameInput" layoutY="35.0" text="lars" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
     <PasswordField fx:id="passwordInput" layoutY="88.0" text="lars" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
     <Label layoutY="16.0" text="Username" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
     <Label layoutY="68.0" text="Password" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
-    <Button fx:id="loginButton" defaultButton="true" layoutY="125.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="31.0" prefWidth="187.0" text="Log in" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
+    <Button fx:id="loginButton" defaultButton="true" layoutY="124.0" mnemonicParsing="false" onAction="#onLoginButton" prefHeight="31.0" prefWidth="187.0" text="Log in" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
     <Label fx:id="registerLink" alignment="CENTER" layoutY="179.0" onMouseReleased="#onRegisterLink" text="No account yet?" textFill="#0d2bb5" underline="true" AnchorPane.leftAnchor="75.0" AnchorPane.rightAnchor="75.0" />
     <Label fx:id="errorLabel" alignment="CENTER" layoutY="155.0" wrapText="true" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-    <Button fx:id="addDataButton" layoutX="289.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#addData" text="Data" />
+    <Button fx:id="addDataButton" disable="true" layoutX="248.0" layoutY="169.0" mnemonicParsing="false" onMouseClicked="#addData" text="Generate Data" />
   </children>
 </AnchorPane>

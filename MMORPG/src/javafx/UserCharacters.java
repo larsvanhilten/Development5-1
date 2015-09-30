@@ -58,8 +58,6 @@ public class UserCharacters extends Application {
     @FXML
     private Label characterClassLabel;
     @FXML
-    private Label characterServerLabel;
-    @FXML
     private Label characterLevelLabel;
     @FXML
     private Button deleteCharacterButton;
@@ -86,8 +84,6 @@ public class UserCharacters extends Application {
         
     }
     
-  
-    
     public void openManagementWindow() throws IOException, Exception {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("UserManagement.fxml"));
             Stage stage = new Stage();
@@ -99,7 +95,6 @@ public class UserCharacters extends Application {
             userManagement.setLoggedInUser(loggedInUser);
             userManagement.setDatabase(database);
             userManagement.start(stage);
-        
             stage.show();
             managementButton.getScene().getWindow().hide();
     
@@ -120,7 +115,6 @@ public class UserCharacters extends Application {
         characterRaceLabel.setText("Race: " + first.getRace());
         characterClassLabel.setText("Class: " + first.getClass1());
         characterLevelLabel.setText("Level: " + first.getLevel());
-        characterServerLabel.setText("Server: TBA");
         }
         characterSlotsLabel.setText("Available slots: " + loggedInUser.getCharacterSlots());
         
@@ -181,9 +175,6 @@ public class UserCharacters extends Application {
         loggedInUser.setCharacterSlots(loggedInUser.getCharacterSlots() - 1);
         setLabels();
         }
-        
-        
-        
     }
     
     public void deleteCharacter(){
@@ -217,7 +208,6 @@ public class UserCharacters extends Application {
                       characterRaceLabel.setText("Race: " + selectedChar.getRace());
                       characterClassLabel.setText("Class: " + selectedChar.getClass1());
                       characterLevelLabel.setText("Level: " + selectedChar.getLevel());
-                      characterServerLabel.setText("Server: TBA"); 
                    }
                 }
                           

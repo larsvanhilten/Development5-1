@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -221,6 +222,65 @@ public class Database {
         updateTransaction.commit();
         
     }
-}
+    
+    private String randomString(){
+        Random r = new Random();
+        int Low = 1000;
+        int High = 99999999;
+        int randomNumber = r.nextInt(High-Low) + Low;
+        
+        String generatedString = Integer.toString(randomNumber);
+         return generatedString;
+    }
+    
+        private int randomLevel() {
+        Random r = new Random();
+        int Low = 1;
+        int High = 101;
+        int randomNumber = r.nextInt(High-Low) + Low;
+        return randomNumber;
+    }
+    
+    public void addDummyData(){
+
+        EntityTransaction transaction = em.getTransaction();
+
+        for(int i = 0; i < 20000; i++){
+        transaction.begin();
+            
+        User user = new User();
+        user.setUsername(randomString());
+        user.setPassword(randomString());  
+        user.setFirstName(randomString());
+        user.setLastName(randomString());
+        user.setIban(randomString());
+        user.setBalance(0.0);
+        user.setBanned(false);
+        user.setCharacterSlots(5);
+        user.setMonthsPayed(0);
+        
+        Character character = new Character();
+        character.setName(randomString());
+        character.setClass1(randomString());
+        character.setRace(randomString());
+        character.setLevel(randomLevel());
+        
+        em.persist(user);
+        em.persist(character);
+                transaction.commit();
+                
+                transaction.begin();
+        user.getCharacterCollection().add(character);
+        character.getUserCollection().add(user);
+        em.merge(user);
+        em.merge(character);
+        transaction.commit();
+        System.out.println(i);
+        }
+
+        em.close();
+        }
+    }
+
 
 

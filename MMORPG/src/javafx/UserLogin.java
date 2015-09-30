@@ -132,7 +132,6 @@ public class UserLogin extends Application {
 
     
     public void addData(){
-        
-        
+        database.addDummyData();     
     }
 }
